@@ -5,8 +5,10 @@ A Dart library to manipulate DateTimes. Useful for creating calendar functionali
 # Example
 
 See Packages:
+
 [Tzolkin Web Calendar](https://pub.dartlang.org/packages/tzolkin)
-[flutter_calendar]()
+
+[flutter_calendar](https://github.com/apptreesoftware/flutter_calendar)
 
 # Usage
 
