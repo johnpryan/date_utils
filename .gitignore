@@ -9,3 +9,4 @@ pubspec.lock
 doc/api/
 
 .idea/*
+ios
