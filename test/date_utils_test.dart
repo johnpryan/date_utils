@@ -48,6 +48,14 @@ void main() {
           Utils.isSameWeek(
               new DateTime(2017, 3, 10), new DateTime(2017, 3, 10)),
           true);
+      expect(
+          Utils.isSameWeek(
+              new DateTime(2018, 3, 29, 12), new DateTime(2018, 3, 22, 12)),
+          false);
+      expect(
+          Utils.isSameWeek(
+              new DateTime(2018, 3, 6, 12), new DateTime(2018, 3, 13, 12)),
+          false);
     });
 
     List<DateTime> testDates = [];
