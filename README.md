@@ -1,5 +1,7 @@
 # date_utils
 
+[![Build Status](https://travis-ci.org/apptreesoftware/date_utils.svg?branch=master)](https://travis-ci.org/apptreesoftware/date_utils)
+
 A Dart library to manipulate DateTimes. Useful for creating calendar functionality.
 
 # Example
