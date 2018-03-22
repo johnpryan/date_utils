@@ -52,7 +52,7 @@ class Utils {
   static DateTime firstDayOfWeek(DateTime day) {
     /// Handle Daylight Savings by setting hour to 12:00 Noon
     /// rather than the default of Midnight
-    day = new DateTime(day.year, day.month, day.day, 12);
+    day = new DateTime.utc(day.year, day.month, day.day, 12);
 
     /// Weekday is on a 1-7 scale Monday - Sunday,
     /// This Calendar works from Sunday - Monday
@@ -63,7 +63,7 @@ class Utils {
   static DateTime lastDayOfWeek(DateTime day) {
     /// Handle Daylight Savings by setting hour to 12:00 Noon
     /// rather than the default of Midnight
-    day = new DateTime(day.year, day.month, day.day, 0);
+    day = new DateTime.utc(day.year, day.month, day.day, 12);
 
     /// Weekday is on a 1-7 scale Monday - Sunday,
     /// This Calendar's Week starts on Sunday
@@ -103,7 +103,12 @@ class Utils {
   }
 
   static bool isSameWeek(DateTime a, DateTime b) {
-    var diff = a.difference(b).inDays;
+    /// Handle Daylight Savings by setting hour to 12:00 Noon
+    /// rather than the default of Midnight
+    a = new DateTime.utc(a.year, a.month, a.day);
+    b = new DateTime.utc(b.year, b.month, b.day);
+
+    var diff = a.toUtc().difference(b.toUtc()).inDays;
     if (diff.abs() >= 7) {
       return false;
     }
