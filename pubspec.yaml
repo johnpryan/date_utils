@@ -3,11 +3,11 @@ authors:
 - John Ryan <john.p.ryan4@gmail.com>
 - Eric Windmill <ericwindmill@gmail.com>
 description: A Dart library for manipulating DateTimes.
-version: 0.0.2
+version: 0.1.0
 homepage: https://github.com/apptreesoftware/date_utils
 
 environment:
-  sdk: '>=1.20.1 <2.0.0'
+  sdk: '>=2.0.0 <3.0.0'
 
 dependencies:
   intl: ^0.15.0
