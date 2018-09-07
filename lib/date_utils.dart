@@ -1,13 +1,16 @@
 library utils;
 
+import 'dart:async';
+
 import "package:intl/intl.dart";
+import 'package:intl/date_symbol_data_local.dart';
 
 class Utils {
-  static final DateFormat _monthFormat = new DateFormat("MMMM yyyy");
-  static final DateFormat _dayFormat = new DateFormat("dd");
-  static final DateFormat _firstDayFormat = new DateFormat("MMM dd");
-  static final DateFormat _fullDayFormat = new DateFormat("EEE MMM dd, yyyy");
-  static final DateFormat _apiDayFormat = new DateFormat("yyyy-MM-dd");
+  static DateFormat _monthFormat = new DateFormat("MMMM yyyy");
+  static DateFormat _dayFormat = new DateFormat("dd");
+  static DateFormat _firstDayFormat = new DateFormat("MMM dd");
+  static DateFormat _fullDayFormat = new DateFormat("EEE MMM dd, yyyy");
+  static DateFormat _apiDayFormat = new DateFormat("yyyy-MM-dd");
 
   static String formatMonth(DateTime d) => _monthFormat.format(d);
   static String formatDay(DateTime d) => _dayFormat.format(d);
@@ -15,7 +18,7 @@ class Utils {
   static String fullDayFormat(DateTime d) => _fullDayFormat.format(d);
   static String apiDayFormat(DateTime d) => _apiDayFormat.format(d);
 
-  static const List<String> weekdays = const [
+  static List<String> weekdays = [
     "Sun",
     "Mon",
     "Tue",
@@ -35,6 +38,24 @@ class Utils {
     var daysAfter = 7 - last.weekday;
     var lastToDisplay = last.add(new Duration(days: daysAfter));
     return daysInRange(firstToDisplay, lastToDisplay).toList();
+  }
+
+  //Give possibility to set custom labels for week days
+  static void setWeekdayLabels(List<String> weekdaysLabels) {
+    weekdays = weekdaysLabels;
+  }
+
+  //Adds a locale for multi language purposes
+  static Future<void> setLocale(String locale) async {
+    if (locale == null || locale.isEmpty) return;
+
+    await initializeDateFormatting();
+
+    _monthFormat = new DateFormat("MMMM yyyy", locale);
+    _dayFormat = new DateFormat("dd", locale);
+    _firstDayFormat = new DateFormat("MMM dd", locale);
+    _fullDayFormat = new DateFormat("EEE MMM dd, yyyy", locale);
+    _apiDayFormat = new DateFormat("yyyy-MM-dd", locale);
   }
 
   static bool isFirstDayOfMonth(DateTime day) {
