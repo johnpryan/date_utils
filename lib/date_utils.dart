@@ -6,13 +6,11 @@ import "package:intl/intl.dart";
 import 'package:intl/date_symbol_data_local.dart';
 
 class Utils {
-  static final DateFormat _monthFormat = new DateFormat("MMMM yyyy", _locale);
-  static final DateFormat _dayFormat = new DateFormat("dd");
-  static final DateFormat _firstDayFormat = new DateFormat("MMM dd", _locale);
-  static final DateFormat _fullDayFormat =
-      new DateFormat("EEE MMM dd, yyyy", _locale);
-  static final DateFormat _apiDayFormat = new DateFormat("yyyy-MM-dd");
-  static String _locale = 'en_US';
+  static DateFormat _monthFormat = new DateFormat("MMMM yyyy");
+  static DateFormat _dayFormat = new DateFormat("dd");
+  static DateFormat _firstDayFormat = new DateFormat("MMM dd");
+  static DateFormat _fullDayFormat = new DateFormat("EEE MMM dd, yyyy");
+  static DateFormat _apiDayFormat = new DateFormat("yyyy-MM-dd");
 
   static String formatMonth(DateTime d) => _monthFormat.format(d);
   static String formatDay(DateTime d) => _dayFormat.format(d);
@@ -51,8 +49,13 @@ class Utils {
   static Future<void> setLocale(String locale) async {
     if (locale == null || locale.isEmpty) return;
 
-    await initializeDateFormatting(locale);
-    _locale = locale;
+    await initializeDateFormatting();
+
+    _monthFormat = new DateFormat("MMMM yyyy", locale);
+    _dayFormat = new DateFormat("dd", locale);
+    _firstDayFormat = new DateFormat("MMM dd", locale);
+    _fullDayFormat = new DateFormat("EEE MMM dd, yyyy", locale);
+    _apiDayFormat = new DateFormat("yyyy-MM-dd", locale);
   }
 
   static bool isFirstDayOfMonth(DateTime day) {
