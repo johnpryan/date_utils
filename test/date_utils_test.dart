@@ -10,6 +10,20 @@ void main() {
       expect(lastDay, expected);
     });
 
+    test('formatMonthWorksCorrectly', () {
+      var dateString = Utils.formatMonth(new DateTime(2017, 3));
+      var expected = "March 2017";
+      expect(dateString, expected);
+    });
+
+    test('formatMonthLocalizedWorksCorrectly', () async {
+      //For example Dutch language
+      await Utils.setLocale('nl_BE');
+      var dateString = Utils.formatMonth(new DateTime(2017, 3));
+      var expected = "maart 2017";
+      expect(dateString, expected);
+    });
+
     test('daysInMonth', () {
       var date = new DateTime(2017, 3);
       var days = Utils.daysInMonth(date);
@@ -97,8 +111,7 @@ void main() {
         var lastDayOfCurrentWeek = Utils.lastDayOfWeek(today);
 
         expect(
-            Utils
-                .daysInRange(firstDayOfCurrentWeek, lastDayOfCurrentWeek)
+            Utils.daysInRange(firstDayOfCurrentWeek, lastDayOfCurrentWeek)
                 .toList()
                 .length,
             7);
