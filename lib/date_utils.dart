@@ -3,11 +3,13 @@ library utils;
 import "package:intl/intl.dart";
 
 class Utils {
-  static final DateFormat _monthFormat = new DateFormat("MMMM yyyy");
+  static final DateFormat _monthFormat = new DateFormat("MMMM yyyy", _locale);
   static final DateFormat _dayFormat = new DateFormat("dd");
-  static final DateFormat _firstDayFormat = new DateFormat("MMM dd");
-  static final DateFormat _fullDayFormat = new DateFormat("EEE MMM dd, yyyy");
+  static final DateFormat _firstDayFormat = new DateFormat("MMM dd", _locale);
+  static final DateFormat _fullDayFormat =
+      new DateFormat("EEE MMM dd, yyyy", _locale);
   static final DateFormat _apiDayFormat = new DateFormat("yyyy-MM-dd");
+  static String _locale = 'en_US';
 
   static String formatMonth(DateTime d) => _monthFormat.format(d);
   static String formatDay(DateTime d) => _dayFormat.format(d);
@@ -35,6 +37,10 @@ class Utils {
     var daysAfter = 7 - last.weekday;
     var lastToDisplay = last.add(new Duration(days: daysAfter));
     return daysInRange(firstToDisplay, lastToDisplay).toList();
+  }
+
+  static void setLocale(String locale) {
+    _locale = locale;
   }
 
   static bool isFirstDayOfMonth(DateTime day) {
