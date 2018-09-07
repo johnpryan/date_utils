@@ -15,6 +15,8 @@ class Utils {
   static String fullDayFormat(DateTime d) => _fullDayFormat.format(d);
   static String apiDayFormat(DateTime d) => _apiDayFormat.format(d);
 
+  static bool _isMondayFirstDayOfWeek = false;
+
   static const List<String> weekdays = const [
     "Sun",
     "Mon",
@@ -49,10 +51,18 @@ class Utils {
     return new DateTime(month.year, month.month);
   }
 
+  static void setIsMondayFirstDayOfWeek(bool isMonday) {
+    _isMondayFirstDayOfWeek = isMonday;
+  }
+
   static DateTime firstDayOfWeek(DateTime day) {
     /// Handle Daylight Savings by setting hour to 12:00 Noon
     /// rather than the default of Midnight
     day = new DateTime.utc(day.year, day.month, day.day, 12);
+
+    if (_isMondayFirstDayOfWeek) {
+      return day.subtract(new Duration(days: day.weekday - 1));
+    }
 
     /// Weekday is on a 1-7 scale Monday - Sunday,
     /// This Calendar works from Sunday - Monday
@@ -64,6 +74,10 @@ class Utils {
     /// Handle Daylight Savings by setting hour to 12:00 Noon
     /// rather than the default of Midnight
     day = new DateTime.utc(day.year, day.month, day.day, 12);
+
+    if (_isMondayFirstDayOfWeek) {
+      return day.add(new Duration(days: day.weekday - 1));
+    }
 
     /// Weekday is on a 1-7 scale Monday - Sunday,
     /// This Calendar's Week starts on Sunday

@@ -97,12 +97,21 @@ void main() {
         var lastDayOfCurrentWeek = Utils.lastDayOfWeek(today);
 
         expect(
-            Utils
-                .daysInRange(firstDayOfCurrentWeek, lastDayOfCurrentWeek)
+            Utils.daysInRange(firstDayOfCurrentWeek, lastDayOfCurrentWeek)
                 .toList()
                 .length,
             7);
       });
     }
+    test('setWhichIsFirstDayOfWeek', () {
+      var date = new DateTime(2018, 9, 6);
+      Utils.setIsMondayFirstDayOfWeek(true);
+
+      var firstDayOfWeek = new DateTime(2018, 9, 3);
+      var lastDayOfWeek = new DateTime(2018, 9, 9);
+
+      expect(Utils.firstDayOfWeek(date).day, firstDayOfWeek.day);
+      expect(Utils.lastDayOfWeek(date).day, lastDayOfWeek.day);
+    });
   });
 }
