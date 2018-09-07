@@ -1,6 +1,9 @@
 library utils;
 
+import 'dart:async';
+
 import "package:intl/intl.dart";
+import 'package:intl/date_symbol_data_local.dart';
 
 class Utils {
   static final DateFormat _monthFormat = new DateFormat("MMMM yyyy", _locale);
@@ -17,7 +20,7 @@ class Utils {
   static String fullDayFormat(DateTime d) => _fullDayFormat.format(d);
   static String apiDayFormat(DateTime d) => _apiDayFormat.format(d);
 
-  static const List<String> weekdays = const [
+  static List<String> weekdays = [
     "Sun",
     "Mon",
     "Tue",
@@ -39,7 +42,16 @@ class Utils {
     return daysInRange(firstToDisplay, lastToDisplay).toList();
   }
 
-  static void setLocale(String locale) {
+  //Give possibility to set custom labels for week days
+  static void setWeekdayLabels(List<String> weekdaysLabels) {
+    weekdays = weekdaysLabels;
+  }
+
+  //Adds a locale for multi language purposes
+  static Future<void> setLocale(String locale) async {
+    if (locale == null || locale.isEmpty) return;
+
+    await initializeDateFormatting(locale);
     _locale = locale;
   }
 
