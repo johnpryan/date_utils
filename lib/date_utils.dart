@@ -33,6 +33,12 @@ class Utils {
     var last = Utils.lastDayOfMonth(month);
 
     var daysAfter = 7 - last.weekday;
+
+    // If the last day is sunday (7) the entire week must be rendered
+    if (daysAfter == 0) {
+      daysAfter = 7;
+    }
+
     var lastToDisplay = last.add(new Duration(days: daysAfter));
     return daysInRange(firstToDisplay, lastToDisplay).toList();
   }
