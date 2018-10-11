@@ -3,6 +3,13 @@ import 'package:test/test.dart';
 
 void main() {
   group('Utils Tests', () {
+    test('firstDayInMonth Sept 30 2018', () {
+      var date = new DateTime(2018, 9, 30);
+      var lastDay = Utils.firstDayOfMonth(date);
+      var expected = new DateTime(2018, 9, 1);
+      expect(lastDay, expected);
+    });
+
     test('lastDayInMonth', () {
       var date = new DateTime(2017, 3);
       var lastDay = Utils.lastDayOfMonth(date);
@@ -26,6 +33,33 @@ void main() {
       var date = new DateTime(2018, 4);
       var days = Utils.daysInMonth(date);
       expect(days, hasLength(42));
+    });
+
+    group('daysInMonth', () {
+      _assertDaysInMonth(
+          {DateTime date, DateTime first, DateTime last, int length}) {
+        var days = Utils.daysInMonth(date);
+        expect(days.first, first);
+        expect(days.last, last);
+        expect(days.length, length);
+      }
+
+      test('9 30 2018', () {
+        _assertDaysInMonth(
+          date: new DateTime(2018, 9, 30),
+          first: new DateTime(2018, 8, 26),
+          last: new DateTime(2018, 10, 6),
+          length: 42,
+        );
+      });
+      test('8 30 2018', () {
+        _assertDaysInMonth(
+          date: new DateTime(2018, 8, 8),
+          first: new DateTime(2018, 7, 29),
+          last: new DateTime(2018, 9, 1),
+          length: 35,
+        );
+      });
     });
 
     test('isSameWeek', () {
@@ -97,8 +131,7 @@ void main() {
         var lastDayOfCurrentWeek = Utils.lastDayOfWeek(today);
 
         expect(
-            Utils
-                .daysInRange(firstDayOfCurrentWeek, lastDayOfCurrentWeek)
+            Utils.daysInRange(firstDayOfCurrentWeek, lastDayOfCurrentWeek)
                 .toList()
                 .length,
             7);
