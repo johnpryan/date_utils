@@ -15,15 +15,46 @@ class Utils {
   static String fullDayFormat(DateTime d) => _fullDayFormat.format(d);
   static String apiDayFormat(DateTime d) => _apiDayFormat.format(d);
 
-  static const List<String> weekdays = const [
-    "Sun",
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat"
+  static String _locale = 'en';
+
+  static List<String> get weekdays => _getWeekdays();
+
+  static const List<String> _locales = const [
+    "en",
+    "ja",
+    "zh",
+    "ko",
+    "de",
+    "fr"
   ];
+
+  static const Map<String, List<String>> weekdaysByLocale = const {
+    "en": const ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "ja": const ["日", "月", "火", "水", "木", "金", "土"],
+    "zh": const ["日", "一", "二", "三", "四", "五", "六"],
+    "ko": const ["일", "월", "화", "수", "목", "금", "토"],
+    "de": const ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
+    "fr": const ["dim", "lun", "mar", "mer", "jeu", "vev", "sam"],
+  };
+
+  /// Set Locale
+  static String setLocale(String newLocale) {
+    if (_locales.contains(newLocale)) {
+      _locale = newLocale;
+    } else {
+      _locale = 'en';
+    }
+
+    return _locale;
+  }
+
+  /// Get Locale
+  static String get locale => _locale ?? 'en';
+
+  /// The list of weekdays
+  static List<String> _getWeekdays() {
+    return weekdaysByLocale[locale];
+  }
 
   /// The list of days in a given month
   static List<DateTime> daysInMonth(DateTime month) {
