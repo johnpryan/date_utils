@@ -138,4 +138,40 @@ void main() {
       });
     }
   });
+
+  group('Locale for weekdays', () {
+    setUpAll(() => Utils.setLocale('en'));
+
+    test('locale in Default', () {
+      expect(Utils.locale, 'en');
+    });
+    test('locale in English', () {
+      Utils.setLocale('en');
+      expect(Utils.locale, 'en');
+    });
+    test('locale in English and Weekdays in English', () {
+      expect(Utils.weekdays, const ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]);
+    });
+
+    test('locale in Korean', () {
+      Utils.setLocale('ko');
+      expect(Utils.locale, 'ko');
+    });
+
+    test('locale in English (set) and Weekdays in English', () {
+      Utils.setLocale('en');
+      expect(Utils.weekdays, const ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]);
+    });
+
+    test('locale in Korean and Weekdays in Korean', () {
+      Utils.setLocale('ko');
+      expect(Utils.weekdays, const [ "일","월","화","수","목","금","토"]);
+    });
+
+    test('illegal locale is fallback to English', () {
+      Utils.setLocale('ILLEGAL LOCALE');
+      expect(Utils.locale, 'en');
+      expect(Utils.weekdays, const ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]);
+    });
+  });
 }
