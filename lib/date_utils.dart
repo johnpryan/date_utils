@@ -1,29 +1,53 @@
 library utils;
 
 import "package:intl/intl.dart";
+import 'package:intl/date_symbol_data_local.dart';
 
 class Utils {
-  static final DateFormat _monthFormat = new DateFormat("MMMM yyyy");
-  static final DateFormat _dayFormat = new DateFormat("dd");
-  static final DateFormat _firstDayFormat = new DateFormat("MMM dd");
-  static final DateFormat _fullDayFormat = new DateFormat("EEE MMM dd, yyyy");
-  static final DateFormat _apiDayFormat = new DateFormat("yyyy-MM-dd");
+  static String formatMonth(DateTime d, {String locale}) {
+    initializeDateFormatting(locale, null);
+    return DateFormat("MMMM yyyy", locale).format(d);
+  }
 
-  static String formatMonth(DateTime d) => _monthFormat.format(d);
-  static String formatDay(DateTime d) => _dayFormat.format(d);
-  static String formatFirstDay(DateTime d) => _firstDayFormat.format(d);
-  static String fullDayFormat(DateTime d) => _fullDayFormat.format(d);
-  static String apiDayFormat(DateTime d) => _apiDayFormat.format(d);
+  static String formatDay(DateTime d, {String locale}) {
+    initializeDateFormatting(locale, null);
+    return DateFormat("dd", locale).format(d);
+  }
 
-  static const List<String> weekdays = const [
-    "Sun",
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat"
-  ];
+  static String formatFirstDay(DateTime d, {String locale}) {
+    initializeDateFormatting(locale, null);
+    return DateFormat("MMM dd", locale).format(d);
+  }
+
+  static String fullDayFormat(DateTime d, {String locale}) {
+    initializeDateFormatting(locale, null);
+    return DateFormat("EEE MMM dd, yyyy", locale).format(d);
+  }
+
+  static String apiDayFormat(DateTime d, {String locale}) {
+    initializeDateFormatting(locale, null);
+    return DateFormat("yyyy-MM-dd", locale).format(d);
+  }
+
+  static String customFormat(DateTime d, {String locale, DateFormat formatter}) {
+    initializeDateFormatting(locale, null);
+    return formatter.format(d);
+  }
+
+  static List<String> weekdays = weekdaysLocale();
+
+  static List<String> weekdaysLocale({locale = 'en'}) {
+    initializeDateFormatting(locale, null);
+    return [
+      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 09)).toUpperCase(),
+      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 10)).toUpperCase(),
+      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 11)).toUpperCase(),
+      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 12)).toUpperCase(),
+      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 13)).toUpperCase(),
+      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 14)).toUpperCase(),
+      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 15)).toUpperCase(),
+    ];
+  }
 
   /// The list of days in a given month
   static List<DateTime> daysInMonth(DateTime month) {
