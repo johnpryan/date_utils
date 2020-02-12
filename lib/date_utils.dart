@@ -38,15 +38,9 @@ class Utils {
 
   static List<String> weekdaysLocale({locale = 'en'}) {
     initializeDateFormatting(locale, null);
-    return [
-      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 09)).toUpperCase(),
-      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 10)).toUpperCase(),
-      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 11)).toUpperCase(),
-      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 12)).toUpperCase(),
-      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 13)).toUpperCase(),
-      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 14)).toUpperCase(),
-      new DateFormat('EEE', locale).format(new DateTime.utc(2020, 02, 15)).toUpperCase(),
-    ];
+    return DateFormat('EEE', locale).dateSymbols.SHORTWEEKDAYS.map((day) {
+      return day.toUpperCase();
+    }).toList();
   }
 
   /// The list of days in a given month
