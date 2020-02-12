@@ -29,7 +29,8 @@ class Utils {
     return DateFormat("yyyy-MM-dd", locale).format(d);
   }
 
-  static String customFormat(DateTime d, {String locale, DateFormat formatter}) {
+  static String customFormat(DateTime d,
+      {String locale, DateFormat formatter}) {
     initializeDateFormatting(locale, null);
     return formatter.format(d);
   }
@@ -97,8 +98,9 @@ class Utils {
 
   /// The last day of a given month
   static DateTime lastDayOfMonth(DateTime month) {
-    var beginningNextMonth =
-        (month.month < 12) ? new DateTime(month.year, month.month + 1, 1) : new DateTime(month.year + 1, 1, 1);
+    var beginningNextMonth = (month.month < 12)
+        ? new DateTime(month.year, month.month + 1, 1)
+        : new DateTime(month.year + 1, 1, 1);
     return beginningNextMonth.subtract(new Duration(days: 1));
   }
 
