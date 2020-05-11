@@ -1,4 +1,4 @@
-Copyright (c) 2018, AppTree.
+Copyright (c) 2020 The date_utils Project Authors
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
