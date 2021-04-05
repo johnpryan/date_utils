@@ -38,9 +38,9 @@ void main() {
     group('daysInMonth', () {
       void _assertDaysInMonth(
         DateTime date, {
-        DateTime first,
-        DateTime last,
-        int length,
+        DateTime? first,
+        DateTime? last,
+        int? length,
       }) {
         var days = DateUtils.daysInMonth(date);
         expect(days.first, first);
@@ -90,7 +90,7 @@ void main() {
     });
 
     List<DateTime> testDates = [];
-    DateTime today;
+    late DateTime today;
 
     setUp(() {
       today = DateTime.now();
