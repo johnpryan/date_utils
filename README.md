@@ -1,6 +1,6 @@
 # date_utils
 
-[![Build Status](https://travis-ci.org/johnpryan/date_utils.svg?branch=master)](https://travis-ci.org/johnpryan/date_utils)
+[![CI](https://github.com/johnpryan/date_utils/workflows/Dart%20CI/badge.svg)](https://github.com/johnpryan/date_utils/actions?query=branch%3Amaster)
 
 A Dart library to manipulate DateTimes. Useful for creating calendar functionality.
 
