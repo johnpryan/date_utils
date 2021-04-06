@@ -18,10 +18,10 @@ See Packages:
 
 ```yaml
 dev_dependencies:
-    date_utils: ^0.0.1
+    date_utils: ^0.2.0
 ```
 
-2. Run `pub install`
+2. Run `dart pub get`
 
 3. Import the package in your Dart code
 
