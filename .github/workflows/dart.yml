@@ -1,0 +1,25 @@
+name: Dart CI
+
+on:
+  push:
+    branches: main
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    name: "Dart Tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: cedx/setup-dart@v2
+        with:
+          release-channel: dev
+      - uses: actions/checkout@v2
+      - run: dart pub get
+      - run: dart format --output=none --set-exit-if-changed .
+      - run: dart analyze
+      - run: dart test -r expanded
+
